@@ -275,26 +275,6 @@ def countVotes(memberId):
     return render_template('showlist.html', member = member, results = rows, label = label, data = data)
 
 
-
-
-
-@app.route('/member')
-@login_required
-def listMembers():
-    memberList = db.session.query(Member)
-    return render_template('memberlist.html', memberList = memberList)
-
-@app.route('/results')
-@login_required
-def results():
-    # memberList = db.session.query(Member)
-    sql = '''select showName, count(*) as total
-    from votes
-    group by showName
-    order by total desc'''
-    resultList = db.engine.execute(sql)
-    return render_template('results.html', resultList = resultList)
-
 '''
 ============================================================
                         HELPER METHODS
