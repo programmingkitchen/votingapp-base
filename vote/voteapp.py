@@ -164,45 +164,6 @@ def login():
     print("LOGIN:  Valid Form on login GET: ", form.validate_on_submit(), file=sys.stderr)
     return render_template('login.html', form=form)
 
-'''
-This magically does email validation. When bad email is entered it will display
-the form again, but it will not say what is wrong.  It preserves the values
-entered previoulsly.
-
-https://wtforms.readthedocs.io/en/stable/crash_course.html#displaying-errors
-'''
-# TODO:  Strip surrounding spaces
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-
-    if form.validate_on_submit():
-        print("REGISTER:  Valid Form on Register Submit: ", form.validate_on_submit(), file=sys.stderr)
-        name = form.name.data
-        name = name.lower()
-        print("REGISTER:  Valid Form on Register Submit: ", name, file=sys.stderr)
-        password = form.password.data
-
-        # Check to see if the email is already registered.
-        # TODO: If this gets triggered what do with do with the message and the
-        # error.  This is how we propagte a raised error. Don't forget the import.
-        try:
-            form.checkName(name)
-            toAdd = Member(name, password)
-            db.session.add(toAdd)
-            db.session.commit()
-            flash('Thanks for registering! Now you can login!')
-            return redirect(url_for('login'))
-        except ValidationError as err:
-            print("ValidationError: ", err.args, file=sys.stderr)
-            flash('Email address already registered.')
-            #flash(err.args)
-            return render_template('register.html', form=form)
-
-    print("REGISTER:  Valid Form on GET: ", form.validate_on_submit(), file=sys.stderr)
-    return render_template('register.html', form=form)
-
-
 
 '''
 ============================================================
