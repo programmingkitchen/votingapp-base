@@ -4,8 +4,9 @@
 
 ## HOW TO RUN APP LOCALLY
 
-alias vrun='cd ~/Dropbox/PYTHON-PROGRAMS/FLASK/VOTE/; pwd; python app.py'
-
+# Set alias for Local Microservice/Web App
+alias vrun='cd  ~/Dropbox/PYTHON-PROGRAMS/FLASK/VOTE-SIMPLE-TEMPLATE-1/vote; pwd; python wsgi.py'
+alias vsrc='cd ~/Dropbox/PYTHON-PROGRAMS/FLASK/VOTE-SIMPLE-TEMPLATE-1/vote; pwd'
 
 ## REQUIREMENTS
 
