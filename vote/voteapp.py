@@ -275,34 +275,7 @@ def countVotes(memberId):
     return render_template('showlist.html', member = member, results = rows, label = label, data = data)
 
 
-'''
-    sqlalchemy.engine.result.ResultProxy
-    sqlalchemy.engine.result.RowProxy
 
-    The keys and the values need to be in lists passed in separately.
-
-'''
-@app.route('/graph')
-def graph():
-    memberId = 7
-    data = []
-    label = []
-
-    sql = '''select showName, count(*) as "total"
-    from votes
-    where memberId = ?
-    group by showName
-    order by total desc, showName
-    '''
-    resultList = db.engine.execute(sql, (memberId,))
-    for i in resultList:
-        label.append(str(i.showName))
-        data.append(i.total)
-
-    print(label, type(label), file=sys.stderr)
-    print(data, type(label), file=sys.stderr)
-
-    return render_template('graph.html', label = label, data = data)
 
 
 @app.route('/member')
