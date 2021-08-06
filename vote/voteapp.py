@@ -43,20 +43,7 @@ def load_user(memberId):
 #TODO:  Explore error propagation.  Where does the ValidationError go?
 # https://wtforms.readthedocs.io/en/stable/validators.html
 # https://wtforms.readthedocs.io/en/stable/fields.html#basic-fields
-class RegistrationForm(FlaskForm):
-    '''
-        Added validators DataRequired(), Email() EqualTo()
-    '''
-    name = StringField('Name: ', validators=[DataRequired()])
-    password = PasswordField('Password: ', validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')])
-    pass_confirm = PasswordField('Confirm Password: ', validators=[DataRequired()])
-    submit = SubmitField('Register')
 
-    # Custom validator
-    def checkName(self, name):
-        # Check if not None for that user email!
-        if Member.query.filter_by(name=name).first():
-            raise ValidationError('The login name entered is already registered.')
 
 class LoginForm(FlaskForm):
     name = StringField('Login: ', validators=[DataRequired()])
