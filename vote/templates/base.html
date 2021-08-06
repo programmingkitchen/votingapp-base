@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <title>Jim Oliver Music Appreciation</title>
+</head>
+
+<body data-spy="scroll" data-target="#main-nav" id="home">
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top" id="main-nav">
+    <div class="container">
+      <a href="{{url_for('login')}}" class="navbar-brand">CultureUP</a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#explore-head-section" class="nav-link">Explore Musicals</a>
+          </li>
+          <li class="nav-item">
+            <a href="#audience-head-section" class="nav-link">Audience</a>
+          </li>
+          {% if current_user.is_authenticated %}
+            <li class="nav-item px-2">
+              <a href="{{url_for('vote')}}" class="nav-link active">Vote Now</a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="{{url_for('stats')}}" class="nav-link active">Stats</a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="{{url_for('logout')}}" class="nav-link active">Logout</a>
+            </li>
+          {% endif %}
+
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME SECTION
+    style="border:5px solid #FFFFFF"
+  -->
+  <header id="home-section">
+    <div class="dark-overlay">
+      <div class="home-inner container">
+        <div class="row">
+
+          <!-- ##########   Col 1   -##########-->
+          <div class="col-lg-8 d-none d-lg-block">
+
+            <h1 class="display-4"><strong>Broadway Recommender</strong>
+            </h1>
+
+            <div class="d-flex">
+              <div class="p-4 align-self-start">
+                <i class="fas fa-check fa-2x"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                James T. Oliver (A.K.A. Jimbo, Kirk, Capt.) has asked for help learning more about music,
+                because he knows that the great innovators from Ada Lovelace to Steve Jobs
+                shared a strong appreciation for music and art.
+                <strong>LET'S HELP JIM DEVELOP HIS INNNOVATION SKILLS</strong> by recommending a Broadway Musical for him
+                to see. Vote for the musical that will best <strong>HELP JIM APPRECIATE MUSIC!</strong>
+                <strong>HELP JIM APPRECIATE MORE LEONARD BERNSTEIN AND LESS LYNRD SKYNYRD.</strong>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="p-4 align-self-start">
+                <i class="fas fa-check fa-2x"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                This is not a traditional "Voting Application."  It's more like  "Recommender System"
+                meets "Applause Meter." So you can vote as many times as you want,
+                and you can vote for the same musical more than once. This would similar to how Netflix
+                keeps track of the movies you watch and then recommends them to others.  If enough people
+                bing watch "The Crown" enough times, Netflix will make it  "Top Recommendation."
+              </div>
+            </div>
+          </div> <!-- Col 1-->
+
+          <!-- ##########   Col 2   ##########-->
+          <div class="col-lg-4">
+            <div class="card bg-primary text-center card-form">
+              <div class="card-body">
+
+              {# get_flashed_messages() is auto sent to the template with the flash() call #}
+                {% for mess in get_flashed_messages()  %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" class="fade close">
+                       <span aria-hidden="true">&times;</span>
+                    </button>
+                     {{mess}}
+                  </div>
+                {% endfor %}
+
+              <!-- BEGIN Block Content -->
+                {%block content%}
+
+
+
+                {% endblock %}
+              <!-- END Block Content -->
+
+              </div> <!-- Card body -->
+            </div> <!-- Card-->
+
+            <!-- BLOCKQUOTE WITH FOOTER -->
+            <blockquote class="blockquote text-right mt-2">
+              <p>The most creative innovations of the digital age came from those
+                who were able to connect the arts and sciences.
+              </p>
+              <footer class="blockquote-footer">Walter Isaacson
+                <cite title="Source Title">The Innovators</cite>
+              </footer>
+            </blockquote>
+
+          </div> <!-- Col 2-->
+
+        </div>  <!-- Row -->
+      </div> <!-- Container -->
+    </div> <!-- Overlay -->
+  </header>
+
+  <!-- EXPLORE HEAD -->
+  <section id="explore-head-section">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-5">
+          <h1 class="display-4">Explore Musicals</h1>
+          <p class="lead">Recommend one or <strong>MORE</strong> musicals to help <strong>JIM APPRECIATE GREAT MUSIC.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section id="explore-section" class="bg-light text-muted py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-5">
+          <h3>Explore Musicals</h3>
+          <p>All of these <strong>musicals</strong> are either currently playing on Broadway or are touring.
+            These award-winning musicals are among <strong>THE BEST EVER CREATED.</strong>  If seeing one of these shows won't encourage Jim
+            to <strong>turn down the volume on Lynrd Skynyrd, </strong> there is no hope.
+          </p>
+
+          <div class="media mt-5">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show1.jpg">
+              <div class="media-body">
+                  <h5>Ain't Too Proud</h5>
+                  <p><strong>Ain't Too Proud is the electrifying new musical that follows The Temptations'
+                     extraordinary journey from the streets of Detroit to the Rock & Roll Hall of Fame.</strong>
+                     With their signature dance moves and unmistakable harmonies, they rose to the top
+                     of the charts creating an amazing 42 Top Ten Hits with 14 reaching number one.</p>
+              </div>
+          </div>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show2.jpg">
+              <div class="media-body">
+                  <h5>Chicago</h5>
+                  <p><strong>Set in the legendary city during the roaring “jazz hot” 20s, Chicago tells the story
+                    of two rival vaudevillian murderesses locked up in Cook County Jail.</strong>
+                    Nightclub star Velma’s serving time for killing her husband and sister after
+                    finding the two in bed together. Driven chorus girl Roxie’s been tossed in the
+                    joint for bumping off the lover she’s been cheating on her husband with. </p>
+              </div>
+          </div>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show3.jpg">
+              <div class="media-body">
+                  <h5>Girl From the North Country</h5>
+                  <p><strong>Celebrated playwright Conor McPherson boldly reimagines the
+                    legendary songs of Bob Dylan, like you’ve never heard them before,
+                    in GIRL FROM THE NORTH COUNTRY.</strong> In what Ben Brantley of The New York
+                    Times raves is “as close as mortals come to heaven on earth,”
+                    GIRL FROM THE NORTH COUNTRY is set at a guesthouse where a group
+                    of wanderers cross paths. Standing at a turning point in their lives,
+                    they realize nothing is what it seems. But as they search for a future,
+                    and hide from the past, they find themselves facing unspoken truths
+                    about the present.</p>
+              </div>
+          </div>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show4.jpg">
+              <div class="media-body">
+                  <h5>Hamilton</h5>
+                  <p><strong>Hamilton is a musical with music, lyrics, and book by Lin-Manuel Miranda that tells
+                  the story of American Founding Father Alexander Hamilton. </strong>
+                    Inspired by the 2004 biography Alexander Hamilton by historian Ron Chernow, the show's music draws heavily from hip hop,
+                    as well as R&B, pop, soul, and traditional-style show tunes; the show also
+                    incorporates color-conscious casting of non-white actors as the Founding Fathers and
+                    other historical figures. Through this use of modern storytelling methods,
+                    Hamilton has been described as being about "America then, as told by America now."
+                </p>
+              </div>
+          </div>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show5.jpg">
+              <div class="media-body">
+                  <h5>In the Heights (Soon to be a movie)</h5>
+                  <p><strong>The story explores three days in the characters' lives in the New York City
+                    Latino neighbourhood of Washington Heights. The score features hip-hop,
+                    salsa, merengue and soul music.</strong> The story is set over the course of three days,
+                    involving characters in the largely Dominican-American neighborhood of Washington
+                    Heights in New York City. </p>
+              </div>
+          </div>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show6.jpg">
+              <div class="media-body">
+                  <h5>Jesus Christ Superstar (50th Anniversary Tour)</h5>
+                  <p><strong>An album that inspired a revolution, a revelation that changed the world.  A reinvention for this millennium.</strong>
+                  Jesus Christ Superstar, created by Tim Rice and Andrew Lloyd Webber, is an iconic musical phenomenon with a world-wide fan base.
+                  </p>
+                  <blockquote class="blockquote text-right ml-5 p-3" style="border:1px solid #000000">
+                    <p class="mb-0">This touring production stays true to the original music, a perfect concept album that has stood the test of time.
+                      Tampering with the original score would have been akin to artistic blasphemy.  With every original
+                      note in the proper place, this production reinvents the <strong>FIRST ROCK OPERA EVER CONCEIVED </strong> with astounding visual
+                      creativity for a modern audience that can identify more with a grunge aesthetic than tunics and sandals. </p>
+                    <footer class="blockquote-footer">Randall Granier
+                      <cite title="Source Title">Simon Zealotes (Jesuit High School Production, 1984)</cite>
+                    </footer>
+                  </blockquote>
+              </div>
+          </div>
+          <br>
+
+          <div class="media">
+              <img class="mr-3 align-self-center mb-5" src="/static/img/show7.jpg">
+              <div class="media-body">
+                  <h5>The Book of Mormon</h5>
+                  <p><strong>The Book of Mormon follows two young missionaries who are sent to Uganda
+                    to try to convert citizens to the Mormon religion.</strong> One missionary, Elder Price,
+                    is an enthusiastic go-getter with a strong dedication to his faith, while his
+                    partner, Elder Cunningham, is a socially awkward but well meaning nerd whose
+                    tendency to embroider the truth soon lands him in trouble. Upon their arrival
+                    in Africa, Elders Price and Cunningham learn that in a society plagued by AIDS,
+                    poverty and violence, a successful mission may not be as easy as they expected.</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATE HEAD -->
+  <section id="audience-head-section" class="bg-primary">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-5">
+          <h1 class="display-4">Muscle Shoals, AL: A missed opportunity</h1>
+          <p class="lead">Life on his Alabama farm has kept Jim isolated from great music, even though
+          some of the greatest music in the world was created just a buggy ride away.
+          <br><br>
+            <blockquote class="blockquote text-right font-italic">
+              <p>"I am the most musically illiterate person in my home.
+                I wear that as a badge of honor. Wait, is this on the record?"</p>
+              <footer class="blockquote-footer text-light">Jim Oliver
+                <cite title="Source Title">Interview (4/2/20)</cite>
+              </footer>
+            </blockquote>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATE SECTION -->
+  <section id="audience-section" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-2">
+          <!-- <img src="img/create-section1.jpg" alt="" class="img-fluid mb-3 rounded-circle"> -->
+          <img src="/static/img/gothic.png" alt="" class="img-fluid mb-3">
+        </div>
+        <div class="col-md-6 order-1">
+          <p>Alabama is the home of Muscle Shoals Sound Studio, which gave birth to some of the
+            greatest music ever created: The Rolling Stones,
+            Aretha Franklin, Wilson Pickett, Joe Cocker, Paul Simon, and of course, <strong>Lynrd Skynyrd.</strong>
+            Several of the musicals on the list are inspired by the Muscle Shoals sounds.
+            </p>
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              During his "contemporary christian gospel period," Bob Dylan
+              recorded "Gotta Serve Somebody" in Muscle Shoals, AL. The
+              Staple Singers, one of the greatest gospel groups ever to record, recorded
+              a hit album in Muscle Shoals.  Should Jim see
+              "Jesus Christ Superstar" or "The Book of Mormon"?
+              <strong>HELP HIM DECIDE!</strong>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              "The Muscle Shoals Sound" was an inspiration for Hamilton, which draws heavily from R&B,
+              pop, soul, and traditional-style show tunes.  Should Jim see "Hamilton"  or "Ain't Too Proud?"
+              <strong>HELP JIM CULTURE UP!</strong>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <div class="p-4 align-self-start">
+              <i class="fas fa-check fa-2x"></i>
+            </div>
+            <div class="p-4 align-self-end">
+              Hank Williams, born in Butler County, Alabama, is regarded as one
+              of the most influential singers and songwriters of the 20th century.
+              Many great song writers covered Hank Williams songs, including Bob Dylan,
+              who also developed a project to turn "The Lost Notebooks of Hank Williams"
+              into finished music. Will seeing "Girl From the North Country"
+              <strong> HELP JIM APPRECIATE MUSIC? </strong>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="main-footer" class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center py-4">
+          <h3>CultureUP</h3>
+          <p>Copyright &copy;
+            <span id="year"></span>
+            CultureUP
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+  <script>
+    // Get the current year for the copyright
+    $('#year').text(new Date().getFullYear());
+
+    // Init Scrollspy
+    $('body').scrollspy({ target: '#main-nav' });
+
+    // Smooth Scrolling
+    $("#main-nav a").on('click', function (event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+
+        const hash = this.hash;
+
+        $('html, body').animate({
+          scrollTop: $(hash).offset().top
+        }, 800, function () {
+
+          window.location.hash = hash;
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
