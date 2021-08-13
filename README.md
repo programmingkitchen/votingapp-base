@@ -1,6 +1,14 @@
 # Vote App
-## votingapp-base
 
+# Description
+This app uses a login system but does not use Flask Blueprint.
+It is designed to be an ideal format for simple apps (not so big where
+blueprints are essential).
+
+It uses:
+WTforms
+SQLalchemy
+sqlite
 
 ## HOW TO RUN APP LOCALLY
 
@@ -8,107 +16,40 @@
 alias vrun='cd  ~/Dropbox/PYTHON-PROGRAMS/FLASK/VOTE-SIMPLE-TEMPLATE-1/vote; pwd; python wsgi.py'
 alias vsrc='cd ~/Dropbox/PYTHON-PROGRAMS/FLASK/VOTE-SIMPLE-TEMPLATE-1/vote; pwd'
 
+
 ## REQUIREMENTS
 
 NOTE:  These are currently installed, but not all may be necessary
 
-alembic==1.2.1
-aniso8601==8.0.0
-bleach==3.1.0
-certifi==2019.9.11
-chardet==3.0.4
-Click==7.0
-Flask==1.1.1
-Flask-HTTPAuth==3.3.0
-Flask-Login==0.4.1
-Flask-Migrate==2.5.2
-Flask-RESTful==0.3.7
-Flask-SQLAlchemy==2.4.1
-Flask-WTF==0.14.2
-httplib2==0.14.0
-idna==2.8
-itsdangerous==1.1.0
-Jinja2==2.10.3
-Mako==1.1.0
-MarkupSafe==1.1.1
-oauth2client==4.1.3
-packaging==19.2
-passlib==1.7.1
-psycopg2-binary==2.8.4
-pyasn1==0.4.7
-pyasn1-modules==0.2.7
-pyparsing==2.4.2
-python-dateutil==2.8.0
+alembic==1.6.5
+aniso8601==9.0.1
+click==8.0.1
+colorama==0.4.4
+Flask==2.0.1
+Flask-HTTPAuth==4.4.0
+Flask-Login==0.5.0
+Flask-Migrate==3.1.0
+Flask-RESTful==0.3.9
+Flask-SQLAlchemy==2.5.1
+Flask-WTF==0.15.1
+greenlet==1.1.1
+importlib-metadata==4.6.3
+itsdangerous==2.0.1
+Jinja2==3.0.1
+Mako==1.1.4
+MarkupSafe==2.0.1
+python-dateutil==2.8.2
 python-editor==1.0.4
-pytz==2019.3
-redis==3.3.11
-requests==2.22.0
-rsa==4.0
-six==1.12.0
-SQLAlchemy==1.3.10
-urllib3==1.25.6
-virtualenv==16.7.8
-webencodings==0.5.1
-Werkzeug==0.16.0
-WTForms==2.2.1
+pytz==2021.1
+six==1.16.0
+SQLAlchemy==1.4.22
+typing-extensions==3.10.0.0
+Werkzeug==2.0.1
+WTForms==2.3.3
+zipp==3.5.0
 
 ## TO DO
 Implement safe_url
 https://flask-login.readthedocs.io/en/latest/
 if not is_safe_url(next):
             return flask.abort(400)
-
-
-This app uses a login/registration system but does not use Flask Blueprint.
-It is designed to be an ideal format for simple apps (not so big where
-  blueprints are essential).
-
-It uses:
-
-WTforms
-SQLalchemy
-sqlite
-
-The views are still part of app.py.  Separating them into their own file may
-require blueprints.
-
-
-## Git Issues
-
-Note:  all changes made at the command line are immediately reflected in
-the Atom window.  
-
-1.  Create Repo locally and commit.
-2. Create Repo on Git Hub.
-3. Attempt to "Publish on GitHub", but get error related to branch.  There is
-"no branch" displayed in the window. On the command line, we see the master branch.
-
-Alternate method.
-
-0. Verify config.
-
-  git config --list
-
-1. Perform functions at first on the command line (see below).
-2. Commit to the master branch results in the master appearing in the Atom window.
-3. Add remote
-
-git remote add origin https://github.com/rgranier/vote.git
-
-4. Now we see the "Publish Icon" in the window.   Click the publish icon and
-   it pushed without further auth necessary.
-
-
-…or create a new repository on the command line
-echo "# vote" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/rgranier/vote.git
-git push -u origin master
-
-
-…or push an existing repository from the command line
-git remote add origin https://github.com/rgranier/vote.git
-git push -u origin master
-# votemonolith
